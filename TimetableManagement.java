@@ -218,19 +218,18 @@ abstract class MainFrame extends JFrame {
         return new MainFrame() {};
     }
 
-    private ImageIcon loadLogoImage() {
-        try {
-            File imageFile = new File("src/NU_Logo.png");
-            ImageIcon icon = imageFile.exists()
-                    ? new ImageIcon(imageFile.getPath())
-                    : new ImageIcon(getClass().getResource("/timetables/image.png"));
+   private ImageIcon loadLogoImage() {
+    try {
+        File imageFile = new File("src/NU_Logo.png");
+        if (!imageFile.exists()) return null;
 
-            Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            return new ImageIcon(scaledImage);
+        ImageIcon icon = new ImageIcon(imageFile.getPath());
+        Image scaledImage = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImage);
         } catch (Exception e) {
-            System.err.println("Error loading logo: " + e.getMessage());
-            return null;
-        }
+        System.err.println("Error loading logo: " + e.getMessage());
+        return null;
+                }
     }
 }
 
